@@ -10,6 +10,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   sync:
@@ -71,22 +72,44 @@ jobs:
             git diff --stat pnpm-lock.yaml
           fi
 
-      - name: Commit lockfile to main
+      # ------------------------------------------------------------------
+      # Create a PR for lockfile changes, then auto-merge it.
+      # Direct pushes to main are blocked by branch protection, so we
+      # go through a PR instead. The squash-merge to main triggers
+      # deploy-staging.yml automatically (it watches lockfile paths).
+      # ------------------------------------------------------------------
+      - name: Create lockfile PR
         if: steps.diff.outputs.changed == 'true'
+        id: pr
+        uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7.0.11
+        with:
+          commit-message: "fix(deps): auto-sync lockfile with sub-repo dependencies"
+          branch: auto/sync-lockfile
+          delete-branch: true
+          title: "fix(deps): auto-sync lockfile with sub-repo dependencies"
+          body: |
+            Automated lockfile regeneration.
+
+            Triggered by: `${{ steps.refs.outputs.trigger }}`
+
+      - name: Auto-merge lockfile PR
+        if: steps.diff.outputs.changed == 'true' && steps.pr.outputs.pull-request-number
+        env:
+          GH_TOKEN: ${{ secrets.DEPLOY_PAT }}
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add pnpm-lock.yaml
-          git commit -m "fix(deps): auto-sync lockfile with sub-repo dependencies"
-          git push origin main
+          gh pr merge ${{ steps.pr.outputs.pull-request-number }} \
+            --repo singi-labs/barazo-workspace \
+            --squash \
+            --auto
 
       # ------------------------------------------------------------------
-      # Trigger staging deploy
-      # - Always deploy when dispatched by a sub-repo (PR merge)
-      # - Only deploy on schedule/manual if the lockfile actually changed
+      # Trigger staging deploy directly ONLY when a sub-repo dispatched
+      # this workflow but the lockfile did not change. When the lockfile
+      # does change, the PR merge to main triggers deploy-staging.yml
+      # automatically, so we skip here to avoid a duplicate deploy.
       # ------------------------------------------------------------------
       - name: Trigger staging deploy
-        if: steps.refs.outputs.deploy == 'true' || steps.diff.outputs.changed == 'true'
+        if: steps.refs.outputs.deploy == 'true' && steps.diff.outputs.changed == 'false'
         uses: peter-evans/repository-dispatch@28959ce8df70de7be546dd1250a005dd32156697 # v4.0.1
         with:
           token: ${{ secrets.DEPLOY_PAT }}
