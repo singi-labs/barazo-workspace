@@ -32,7 +32,7 @@ jobs:
       - name: Checkout target repo
         uses: actions/checkout@v4
         with:
-          repository: barazo-forum/${{ matrix.repo }}
+          repository: singi-labs/${{ matrix.repo }}
           token: ${{ secrets.SYNC_TOKEN }}
           path: target-repo
 
@@ -64,7 +64,7 @@ jobs:
           git push -u origin "$BRANCH"
           PR_URL=$(gh pr create \
             --title "docs: sync AGENTS.md from barazo-workspace" \
-            --body "Auto-generated from [barazo-workspace/agents-md](https://github.com/barazo-forum/barazo-workspace/tree/main/agents-md). Do not edit AGENTS.md directly in this repo." \
+            --body "Auto-generated from [barazo-workspace/agents-md](https://github.com/singi-labs/barazo-workspace/tree/main/agents-md). Do not edit AGENTS.md directly in this repo." \
             --head "$BRANCH" \
             --base main)
 

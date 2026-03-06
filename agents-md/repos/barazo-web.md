@@ -1,9 +1,9 @@
 # Barazo Web -- Default Frontend
 
 <!-- Auto-generated from barazo-workspace. To propose changes, edit the source:
-     https://github.com/barazo-forum/barazo-workspace/tree/main/agents-md -->
+     https://github.com/singi-labs/barazo-workspace/tree/main/agents-md -->
 
-MIT | Part of [github.com/barazo-forum](https://github.com/barazo-forum)
+MIT | Part of [github.com/singi-labs](https://github.com/singi-labs)
 
 The default frontend for Barazo forums. Communicates with the AppView backend exclusively via REST API. Forum admins can customize or replace entirely.
 

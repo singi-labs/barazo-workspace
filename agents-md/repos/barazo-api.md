@@ -1,9 +1,9 @@
 # Barazo API -- AppView Backend
 
 <!-- Auto-generated from barazo-workspace. To propose changes, edit the source:
-     https://github.com/barazo-forum/barazo-workspace/tree/main/agents-md -->
+     https://github.com/singi-labs/barazo-workspace/tree/main/agents-md -->
 
-AGPL-3.0 | Part of [github.com/barazo-forum](https://github.com/barazo-forum)
+AGPL-3.0 | Part of [github.com/singi-labs](https://github.com/singi-labs)
 
 The AppView backend for Barazo. Subscribes to AT Protocol firehose, indexes `forum.barazo.*` records in PostgreSQL, and exposes a REST API for all forum operations.
 

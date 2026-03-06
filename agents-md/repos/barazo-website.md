@@ -1,9 +1,9 @@
 # Barazo Website -- Marketing Site
 
 <!-- Auto-generated from barazo-workspace. To propose changes, edit the source:
-     https://github.com/barazo-forum/barazo-workspace/tree/main/agents-md -->
+     https://github.com/singi-labs/barazo-workspace/tree/main/agents-md -->
 
-MIT | Part of [github.com/barazo-forum](https://github.com/barazo-forum)
+MIT | Part of [github.com/singi-labs](https://github.com/singi-labs)
 
 Marketing site for Barazo at barazo.forum. Built with Astro. Documentation lives in barazo-docs (docs.barazo.forum).
 

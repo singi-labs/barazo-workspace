@@ -37,7 +37,7 @@ jobs:
         run: |
           for pkg in barazo-api barazo-web barazo-lexicons; do
             mkdir -p "$pkg"
-            curl -sL "https://raw.githubusercontent.com/barazo-forum/$pkg/main/package.json" \
+            curl -sL "https://raw.githubusercontent.com/singi-labs/$pkg/main/package.json" \
               -o "$pkg/package.json"
           done
 
