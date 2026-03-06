@@ -94,9 +94,6 @@ importers:
       '@atproto/tap':
         specifier: 0.2.7
         version: 0.2.7
-      '@barazo-forum/lexicons':
-        specifier: link:../barazo-lexicons
-        version: link:../barazo-lexicons
       '@fastify/cookie':
         specifier: 11.0.2
         version: 11.0.2
@@ -127,6 +124,9 @@ importers:
       '@sentry/node':
         specifier: 10.41.0
         version: 10.41.0
+      '@singi-labs/lexicons':
+        specifier: link:../barazo-lexicons
+        version: link:../barazo-lexicons
       cborg:
         specifier: 4.5.8
         version: 4.5.8
@@ -258,9 +258,6 @@ importers:
 
   barazo-web:
     dependencies:
-      '@barazo-forum/lexicons':
-        specifier: link:../barazo-lexicons
-        version: link:../barazo-lexicons
       '@dnd-kit/core':
         specifier: 6.3.1
         version: 6.3.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
@@ -357,6 +354,9 @@ importers:
       '@radix-ui/react-tooltip':
         specifier: 1.2.8
         version: 1.2.8(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@singi-labs/lexicons':
+        specifier: link:../barazo-lexicons
+        version: link:../barazo-lexicons
       '@tailwindcss/typography':
         specifier: 0.5.19
         version: 0.5.19(tailwindcss@4.2.1)
