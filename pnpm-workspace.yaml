@@ -4,6 +4,10 @@ packages:
   - "barazo-web"
   - "barazo-plugins"
 
+# Required for pnpm deploy with link: dependencies across workspace members.
+# See https://pnpm.io/cli/deploy
+forceLegacyDeploy: true
+
 catalog:
   zod: "^4.3.6"
   vitest: "^4.0.18"
