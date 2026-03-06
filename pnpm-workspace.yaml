@@ -2,6 +2,7 @@ packages:
   - "barazo-lexicons"
   - "barazo-api"
   - "barazo-web"
+  - "barazo-plugins"
 
 catalog:
   zod: "^4.3.6"

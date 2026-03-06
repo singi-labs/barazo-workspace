@@ -51,11 +51,15 @@ jobs:
 
       - name: Fetch workspace member manifests
         run: |
-          for pkg in barazo-api barazo-web barazo-lexicons; do
+          for pkg in barazo-api barazo-web barazo-lexicons barazo-plugins; do
             mkdir -p "$pkg"
             curl -sfL "https://raw.githubusercontent.com/singi-labs/$pkg/main/package.json" \
               -o "$pkg/package.json"
           done
+          # Fetch sub-packages for plugins monorepo
+          mkdir -p barazo-plugins/packages/plugin-signatures
+          curl -sfL "https://raw.githubusercontent.com/singi-labs/barazo-plugins/main/packages/plugin-signatures/package.json" \
+            -o "barazo-plugins/packages/plugin-signatures/package.json"
 
       - name: Regenerate lockfile
         run: pnpm install --no-frozen-lockfile
