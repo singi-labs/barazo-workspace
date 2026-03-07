@@ -2,7 +2,7 @@ packages:
   - "barazo-lexicons"
   - "barazo-api"
   - "barazo-web"
-  - "barazo-plugins"
+  - "barazo-plugins/packages/*"
 
 # Required for pnpm deploy with link: dependencies across workspace members.
 # See https://pnpm.io/cli/deploy
