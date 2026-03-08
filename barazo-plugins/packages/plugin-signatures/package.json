@@ -8,11 +8,11 @@
   "exports": {
     "./plugin.json": "./plugin.json",
     "./backend/*": "./dist/backend/*.js",
-    "./frontend/*": "./dist/frontend/*.js",
-    "./frontend/register": "./dist/frontend/register.js",
-    "./frontend/CommunitySignatureField": "./dist/frontend/CommunitySignatureField.js",
-    "./frontend/DefaultSignatureField": "./dist/frontend/DefaultSignatureField.js",
-    "./frontend/PostSignature": "./dist/frontend/PostSignature.js"
+    "./frontend/register": "./frontend/register.ts",
+    "./frontend/CommunitySignatureField": "./frontend/CommunitySignatureField.tsx",
+    "./frontend/DefaultSignatureField": "./frontend/DefaultSignatureField.tsx",
+    "./frontend/PostSignature": "./frontend/PostSignature.tsx",
+    "./frontend/*": "./dist/frontend/*.js"
   },
   "files": [
     "dist",
@@ -22,6 +22,10 @@
     "build": "tsc",
     "build:backend": "tsc -p tsconfig.backend.json",
     "test": "vitest run"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3"
   },
   "peerDependencies": {
     "fastify": "^5.0.0",
