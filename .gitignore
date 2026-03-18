@@ -9,6 +9,7 @@
 # Allow .github/workflows/ in this repo for CI triggers
 /.github/*
 !/.github/workflows/
+!/.github/ISSUE_TEMPLATE/
 
 # Claude Code (private per-machine)
 CLAUDE.md
