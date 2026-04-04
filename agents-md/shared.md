@@ -34,6 +34,8 @@ The GitHub board may lag behind actual implementation state. Partial or complete
 
 All changes go through Pull Requests -- never commit directly to `main`. Branch naming: `type/short-description` (e.g., `feat/add-reactions`, `fix/xss-sanitization`).
 
+**No AI attribution in commits or PRs.** Never include "Generated with Claude Code", "Co-Authored-By: Claude", or any AI tool attribution in commit messages, PR titles, or PR bodies.
+
 **Use git worktrees for all feature work.** Each branch must get its own working directory. This prevents multiple agents from stepping on each other's files and allows parallel work without stashing.
 
 ```bash
