@@ -12,10 +12,12 @@ for repo_file in "$REPOS_DIR"/*.md; do
   repo_name="$(basename "$repo_file" .md)"
   output="$OUTPUT_DIR/$repo_name.md"
 
-  # Concatenate: repo-specific header + separator + shared base
+  # Concatenate: repo-specific header + separator + shared base.
+  # Substitute <repo> placeholders in shared.md with the actual repo name so
+  # rendered commands and paths are directly runnable per repo.
   cat "$repo_file" > "$output"
   printf '\n---\n\n' >> "$output"
-  cat "$SHARED" >> "$output"
+  sed "s/<repo>/$repo_name/g" "$SHARED" >> "$output"
 
   echo "Built: $output"
 done
