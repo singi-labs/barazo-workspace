@@ -75,19 +75,25 @@ jobs:
               echo "| Package | Current | Latest | Type | Workspace |"
               echo "|---------|---------|--------|------|-----------|"
 
-              # Parse JSON output into markdown table
+              # Parse JSON output into markdown table.
+              # pnpm may print WARN lines (e.g. unsupported pnpm.overrides
+              # location) to stdout before the JSON payload, so skip to the
+              # first '{' rather than assuming stdin is pure JSON.
               echo "$OUTPUT" | python3 -c "
           import json, sys
+          raw = sys.stdin.read()
+          start = raw.find('{')
           try:
-              data = json.load(sys.stdin)
+              if start == -1:
+                  raise json.JSONDecodeError('no JSON object found', raw, 0)
+              data = json.loads(raw[start:])
               for pkg_name, info in sorted(data.items()):
                   current = info.get('current', '?')
                   latest = info.get('latest', '?')
                   dep_type = info.get('dependencyType', '?')
-                  # Determine which workspace package
-                  belongs_to = info.get('belongsTo', '.')
-                  if belongs_to == '.':
-                      belongs_to = 'root'
+                  # Determine which workspace package(s) depend on it
+                  dependents = info.get('dependentPackages', [])
+                  belongs_to = ', '.join(d.get('name', '?') for d in dependents) or 'root'
                   print(f'| \`{pkg_name}\` | {current} | {latest} | {dep_type} | {belongs_to} |')
           except json.JSONDecodeError:
               print('Could not parse pnpm outdated output.')
